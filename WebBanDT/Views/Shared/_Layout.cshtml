@@ -1,42 +1,199 @@
-﻿<!DOCTYPE html>
+﻿@using WebBanDT.Models
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/bootstrap-icons-1.10.3/bootstrap-icons.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+          rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+          rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css"
+          rel="stylesheet" />
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+
+<body onload="getGioHangPartial();">
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-success ">
         <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" title="more options">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+            @Html.ActionLink("Cửa hàng Điện Thoại", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav flex-grow-1">
+                    <li>@Html.ActionLink("Trang chủ", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Danh Mục", "DanhMuc", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Lịch sử đặt hàng", "XemLichSuDonHang", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    @if ((KhachHang)Session["TaiKhoan"] != null)
+                    {
+                        KhachHang kh = (KhachHang)Session["TaiKhoan"];
+                        if (kh.Quyen.TenQuyen.Equals("Admin"))
+                        {
+                            <li>@Html.ActionLink("Admin", "Index", "Admin", new { area = "" }, new { @class = "nav-link" })</li>
+                        }
+                    }
+                    @using (Html.BeginForm("Search", "Home"))
+                    {
+                        <li class="form-group form-inline" style="display: flex;">
+
+                            <input type="text" class="form-control col-md-10" value="@ViewBag.Keyword"
+                                   name="search" placeholder="Nhập tên sản phẩm cần tìm">
+                            <input type="submit" class="btn btn-outline-light" value="Search" style="margin-left:10px;">
+                        </li>
+                    }
                 </ul>
+
+                <ul class="navbar-nav">
+
+
+                    <li>@Html.ActionLink(" ", "GioHang", "GioHang", new { area = "" }, new { @class = "bi bi-basket nav-link" })</li>
+                    <li id="GioHangPartial"> </li>
+
+                </ul>
+                <div class="navbar-right">
+                    @if ((KhachHang)Session["TaiKhoan"] == null)
+                    {
+
+                        <ul class="nav navbar-nav">
+                            <li>@Html.ActionLink("Dang Nhap", "DangNhap", "User", new { area = "" }, new { @class = "nav-link" })</li>
+                            <li>@Html.ActionLink("Dang Ky", "DangKy", "User", new { area = "" }, new { @class = "nav-link" })</li>
+                        </ul>
+                    }
+                    else
+                    {
+                        KhachHang kh = (KhachHang)Session["TaiKhoan"];
+                        <ul class="nav navbar-nav">
+                            <li>@Html.ActionLink("Hello " + kh.hoten + "!", "", "", new { id = kh.makh }, new { @class = "nav-link" })</li>
+                            <li>@Html.ActionLink("Log Out!", "DangXuat", "User", new { area = "" }, new { @class = "nav-link" })</li>
+                        </ul>
+
+                    }
+                </div>
             </div>
         </div>
-    </div>
+
+    </nav>
+
+
+
+    <script type="text/javascript">
+        function getGioHangPartial() {
+            $.ajax({
+                type: 'GET',
+                url: "@Url.Action("GioHangPartial", "GioHang")",
+                success: function (result) {
+                    $("#GioHangPartial").html(result);
+                }
+            });
+        }
+    </script>
+
+
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"></script>
+    <script src="~/Scripts/App/JavaScript.js"></script>
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
     </div>
+
+
+
+
+    <footer class="text-center text-lg-start bg-light text-muted">
+
+
+        <section class="d-flex justify-content-center justify-content-lg-center p-4 border-bottom">
+
+            <div>
+                <a href="" class="me-4 text-reset">
+                    <i class="bi bi-facebook"></i>
+                </a>
+                <a href="" class="me-4 text-reset">
+                    <i class="bi bi-instagram"></i>
+                </a>
+                <a href="" class="me-4 text-reset">
+                    <i class="bi bi-google"></i>
+                </a>
+                <a href="" class="me-4 text-reset">
+                    <i class="bi bi-linkedin"></i>
+                </a>
+                <a href="" class="me-4 text-reset">
+                    <i class="bi bi-github"></i>
+                </a>
+            </div>
+
+        </section>
+
+        <section class="">
+            <div class="container text-center text-md-start mt-5">
+
+                <div class="row mt-3">
+
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            <i class="fas fa-mobile-phone me-3"></i>Website bán điện thoại
+                        </h6>
+                        <p>
+                            Cửa hàng cung cấp các thiết bị di động mới nhất hiện nay với giá thành hợp lí.
+                        </p>
+                    </div>
+
+                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Hỗ trợ
+                        </h6>
+                        <p>
+                            <a href="#!" class="text-reset">Câu hỏi thường gặp</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Điều khoản & Điều kiện</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Báo lỗi</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Hotline Hỗ trợ</a>
+                        </p>
+                    </div>
+
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+
+                        <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+                        <p><i class="fas fa-home me-3"></i>VN,TP HCM , Quận 9</p>
+                        <p>
+                            <i class="fas fa-envelope me-3"></i>
+                            doancosohutech@gmail.com
+                        </p>
+                        <p><i class="fas fa-phone me-3"></i> + 01 234 567 88</p>
+                        <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+            © 2023 Copyright:
+            <a class="text-reset fw-bold" href="#">Đồ án cơ sở</a>
+        </div>
+    </footer>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    @RenderSection("upload", required: false)
 </body>
 </html>
+
+

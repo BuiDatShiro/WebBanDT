@@ -1,0 +1,85 @@
+﻿@model WebBanDT.Models.SanPham
+
+@{
+    ViewBag.Title = "XoaSP";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>XoaSP</h2>
+@using WebBanDT.Models
+@{
+    KhachHang kh = (KhachHang)Session["TaiKhoan"];
+}
+@if (kh.Quyen.TenQuyen.Equals("Admin"))
+{
+    <h3>Bạn có chắc muốn xóa sản phẩm này ?</h3>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.TenSP)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TenSP)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.GiaSP)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.GiaSP)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Slgton)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Slgton)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.HinhSP)
+            </dt>
+
+            <dd>
+                <img src="@Model.HinhSP" />
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.NgayNhap)
+            </dt>
+
+            <dd>
+                @Convert.ToDateTime(Model.NgayNhap).ToString("dd/MM/yyyy")
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DanhMuc.TenDM)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DanhMuc.TenDM)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        }
+    </div>
+}
+
+
+else
+{
+    <h2 style="color:red"><strong>BẠN PHẢI LÀ ADMIN MỚI ĐƯỢC QUYỀN TRUY CẬP TRANG NÀY</strong></h2>
+}

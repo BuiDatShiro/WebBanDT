@@ -1,0 +1,30 @@
+﻿@model IEnumerable<WebBanDT.Models.ChiTietDonHang>
+@{
+    ViewBag.Title = "XemCTDH";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Chi Tiết Đơn Hàng</h2>
+<div>
+    @{ double x = 0;}
+    <table class="table">
+        <tr class="text-center">
+            <th> Mã đơn hàng </th>
+            <th> Tên sản phẩm </th>
+            <th> Số lượng đặt </th>
+            <th> Tổng tiền sản phẩm</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr class="text-center">
+                <td>@Html.DisplayFor(modelItem => item.madon)</td>
+                <td>@Html.DisplayFor(modelItem => item.SanPham.TenSP)</td>
+                <td>@Html.DisplayFor(modelItem => item.soluong)</td>
+                @{ int tong = (int)item.soluong * (int)item.SanPham.GiaSP;}
+                <td>@tong VND</td>
+                @{ x += tong;}
+            </tr>
+        }
+    </table>
+    <h1>Tổng số tiền thanh toán: @x VND</h1>
+</div>

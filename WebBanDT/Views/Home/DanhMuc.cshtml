@@ -1,0 +1,16 @@
+﻿@model IEnumerable<WebBanDT.Models.DanhMuc>
+@{
+    ViewBag.Title = "DanhMuc";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Danh Mục</h2>
+<div>
+    @foreach(var dm in Model)
+{
+        <div>
+            <a href="/Home/DanhMucSP/@dm.MaDM">@dm.TenDM</a>
+        </div>
+        
+}
+</div>
