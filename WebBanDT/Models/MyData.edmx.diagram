@@ -4,18 +4,24 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="1f07c859effb43c6ad96634dd9edf7f6" Name="Diagram1">
-        <EntityTypeShape EntityType="WebBanDTModel.ChiTietDonHang" Width="1.5" PointX="5.25" PointY="2.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="WebBanDTModel.DanhMuc" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="WebBanDTModel.DonHang" Width="1.5" PointX="3" PointY="2.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="WebBanDTModel.HoaDon" Width="1.5" PointX="5.25" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="WebBanDTModel.KhachHang" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="WebBanDTModel.SanPham" Width="1.5" PointX="3" PointY="7.125" IsExpanded="true" />
-        <AssociationConnector Association="WebBanDTModel.FK__ChiTietDo__madon__2E1BDC42" ManuallyRouted="false" />
-        <AssociationConnector Association="WebBanDTModel.FK__ChiTietDon__MaSP__2F10007B" ManuallyRouted="false" />
-        <AssociationConnector Association="WebBanDTModel.FK__SanPham__MaDM__33D4B598" ManuallyRouted="false" />
-        <AssociationConnector Association="WebBanDTModel.FK__DonHang__makh__300424B4" ManuallyRouted="false" />
-        <AssociationConnector Association="WebBanDTModel.FK__HoaDon__MaDH__32E0915F" ManuallyRouted="false" />
+      <Diagram DiagramId="fa2985bd3d8f4dfc8ad77ce0e1323bd3" Name="Diagram1">
+        <EntityTypeShape EntityType="db_aa3286_loginModel.ChiTietDonHang" Width="1.5" PointX="7.5" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_aa3286_loginModel.DanhMuc" Width="1.5" PointX="3" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_aa3286_loginModel.DonHang" Width="1.5" PointX="5.25" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_aa3286_loginModel.HinhThucTT" Width="1.5" PointX="8.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_aa3286_loginModel.HoaDon" Width="1.5" PointX="10.5" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_aa3286_loginModel.KhachHang" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_aa3286_loginModel.Quyen" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_aa3286_loginModel.SanPham" Width="1.5" PointX="5.25" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_aa3286_loginModel.ThanhToan" Width="1.5" PointX="12.75" PointY="3.5" IsExpanded="true" />
+        <AssociationConnector Association="db_aa3286_loginModel.FK__ChiTietDo__madon__33D4B598" ManuallyRouted="false" />
+        <AssociationConnector Association="db_aa3286_loginModel.FK__ChiTietDon__MaSP__34C8D9D1" ManuallyRouted="false" />
+        <AssociationConnector Association="db_aa3286_loginModel.FK__SanPham__MaDM__38996AB5" ManuallyRouted="false" />
+        <AssociationConnector Association="db_aa3286_loginModel.FK__DonHang__makh__35BCFE0A" ManuallyRouted="false" />
+        <AssociationConnector Association="db_aa3286_loginModel.FK__HoaDon__MaDH__36B12243" ManuallyRouted="false" />
+        <AssociationConnector Association="db_aa3286_loginModel.FK__HoaDon__MaHT__398D8EEE" ManuallyRouted="false" />
+        <AssociationConnector Association="db_aa3286_loginModel.FK__ThanhToan__MaHoa__3A81B327" ManuallyRouted="false" />
+        <AssociationConnector Association="db_aa3286_loginModel.FK__KhachHang__MaQuy__37A5467C" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

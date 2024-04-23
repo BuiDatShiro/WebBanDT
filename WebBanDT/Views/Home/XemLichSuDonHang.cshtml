@@ -1,0 +1,78 @@
+﻿@model IEnumerable<WebBanDT.Models.DonHang>
+@{
+    ViewBag.Title = "XemLichSuDonHang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using WebBanDT.Models
+@{
+    KhachHang kh = (KhachHang)Session["TaiKhoan"];
+}
+<h2>Lịch sử đơn hàng</h2>
+<div>
+    <table class="table">
+        <tr class="text-center">
+            <th> Mã đơn hàng </th>
+            <th> Ngày đặt </th>
+            <th> Ngày giao hàng </th>
+            <th> Tình trạng </th>
+            @if (kh.Quyen.TenQuyen.Equals("Admin"))
+            {
+                <th> Tên khách đặt hàng </th>
+            }
+            <th></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr class="text-center">
+                <td>@Html.DisplayFor(modelItem => item.madon)</td>
+                <td>@Convert.ToDateTime(item.ngaydat).ToString("dd/MM/yyyy")</td>
+                <td>@Convert.ToDateTime(item.ngaygiao).ToString("dd/MM/yyyy")</td>
+                @if (item.giaohang == 1)
+                {
+                    <td>Đang chờ giao hàng</td>
+                }
+                else if (item.giaohang == 2)
+                {
+                    <td>Đã giao hàng</td>
+                }
+                else if (item.giaohang == 0)
+                {
+                    <td>Đơn hàng bị hủy</td>
+                }
+                else
+                {
+                    <td>Đang chờ xác nhận đơn hàng</td>
+                }
+                @if (kh.Quyen.TenQuyen.Equals("Admin"))
+                {
+                    <td>@Html.DisplayFor(modelItem => item.KhachHang.hoten)</td>
+                }
+                <td>
+                    @Html.ActionLink("Xem chi tiết", "XemCTDH", new { id = item.madon })
+                </td>
+                <td>
+                    @if (!(item.giaohang == 0 || item.giaohang == 2))
+                    {
+                        @Html.ActionLink("Hủy đơn hàng", "XacnhanHuyDonhang",  new { id = item.madon }, new { onclick = "return confirm('Xác nhận hủy đơn hàng ?');" })
+                    }
+                    <br />
+                    @if (kh.Quyen.TenQuyen.Equals("Admin"))
+                    {
+                        if (item.giaohang == null)
+                        {
+                            @Html.ActionLink("Xác nhận đơn hàng", "XacnhanDonhangThanhCong", new { id = item.madon }, new { onclick = "return confirm('Xác nhận đơn hàng ?');" })
+                        }
+                        else if (item.giaohang == 1)
+                        {
+                            @Html.ActionLink("Xác nhận đã giao hàng", "XacnhanGiaohangThanhCong", new { id = item.madon }, new { onclick = "return confirm('Xác nhận đã giao hàng ?');" })
+                        }
+                    }
+                </td>
+
+            </tr>
+        } 
+    </table>
+</div>
+
+

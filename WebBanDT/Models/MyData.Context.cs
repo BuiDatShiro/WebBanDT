@@ -28,8 +28,11 @@ namespace WebBanDT.Models
         public virtual DbSet<ChiTietDonHang> ChiTietDonHang { get; set; }
         public virtual DbSet<DanhMuc> DanhMuc { get; set; }
         public virtual DbSet<DonHang> DonHang { get; set; }
+        public virtual DbSet<HinhThucTT> HinhThucTT { get; set; }
         public virtual DbSet<HoaDon> HoaDon { get; set; }
         public virtual DbSet<KhachHang> KhachHang { get; set; }
+        public virtual DbSet<Quyen> Quyen { get; set; }
         public virtual DbSet<SanPham> SanPham { get; set; }
+        public virtual DbSet<ThanhToan> ThanhToan { get; set; }
     }
 }

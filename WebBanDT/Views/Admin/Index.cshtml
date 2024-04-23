@@ -1,0 +1,50 @@
+﻿@model IEnumerable<WebBanDT.Models.SanPham>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using WebBanDT.Models
+@{
+    KhachHang kh = (KhachHang)Session["TaiKhoan"];
+}
+@if (kh.Quyen.TenQuyen.Equals("Admin"))
+{
+    <h2>Sản Phẩm</h2>
+    @Html.ActionLink("Thêm sản phẩm", "ThemSP", new { @class = "btn btn-primary" })
+    <table class="table">
+        <tr class="text-center">
+            <th> Mã hàng </th>
+            <th> Tên hàng</th>
+            <th> Giá </th>
+            <th> Số lượng tồn</th>
+            <th> Hình </th>
+            <th> Ngày nhập </th>
+            <th> Danh mục </th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr class="text-center">
+                <td>@Html.DisplayFor(modelItem => item.MaSP)</td>
+                <td>@Html.DisplayFor(modelItem => item.TenSP)</td>
+                <td>@Html.DisplayFor(modelItem => item.GiaSP)</td>
+                <td>@Html.DisplayFor(modelItem => item.Slgton)</td>
+                <td><img src="@item.HinhSP" alt="hinh thumbnail" width="75%" height="75%" /></td>
+
+                <td>@Convert.ToDateTime(item.NgayNhap).ToString("dd/MM/yyyy")</td>
+                <td>@Html.DisplayFor(modelItem => item.DanhMuc.TenDM)</td>
+                <td>
+                    @Html.ActionLink("Edit", "SuaSP", new { id = item.MaSP }) |
+                    @Html.ActionLink("Detail", "ThongTinSP", new { id = item.MaSP }) |
+                    @Html.ActionLink("Delete", "XoaSP", new { id = item.MaSP })
+                </td>
+            </tr>
+        }
+    </table>
+
+
+}
+else
+{
+    <h2 style="color:red"><strong>BẠN PHẢI LÀ ADMIN MỚI ĐƯỢC QUYỀN TRUY CẬP TRANG NÀY</strong></h2>
+}

@@ -14,11 +14,21 @@ namespace WebBanDT.Models
     
     public partial class HoaDon
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public HoaDon()
+        {
+            this.ThanhToan = new HashSet<ThanhToan>();
+        }
+    
         public int MaHD { get; set; }
         public Nullable<System.DateTime> NgayLapHD { get; set; }
         public Nullable<int> ThanhTien { get; set; }
         public Nullable<int> MaDH { get; set; }
+        public Nullable<int> MaHT { get; set; }
     
         public virtual DonHang DonHang { get; set; }
+        public virtual HinhThucTT HinhThucTT { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ThanhToan> ThanhToan { get; set; }
     }
 }
